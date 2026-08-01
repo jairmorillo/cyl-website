@@ -1,0 +1,81 @@
+:root {
+  /* Colors */
+  --color-primary: #001f3f; /* Deep Navy Blue */
+  --color-secondary: #004080; /* Lighter Navy */
+  --color-white: #ffffff;
+  --color-background-light: #f7f9fb;
+  --color-text-dark: #191c1e;
+  --color-text-light: #f7f9fb;
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+  --color-glass-bg: rgba(255, 255, 255, 0.1);
+  --color-glass-dark-bg: rgba(0, 31, 63, 0.7);
+
+  /* Typography */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Layout */
+  --container-width: 1200px;
+  --section-padding: 80px 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-background-light);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 12px;
+}
+
+.glass-panel-dark {
+  background: var(--color-glass-dark-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--color-white);
+}
+
+/* Alternate sections */
+.section-light {
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
+}
+
+.section-dark {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}

@@ -1,0 +1,117 @@
+.aboutSection {
+  position: relative;
+  padding: 100px 20px;
+  overflow: hidden;
+  background-color: var(--color-primary);
+}
+
+.topGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.aboutContainer {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.textContent {
+  color: var(--color-white);
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cardContainer {
+  position: relative;
+}
+
+.philosophyCard {
+  background: rgba(0, 31, 63, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.cardIcon {
+  position: absolute;
+  top: -24px;
+  left: -24px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  transform: rotate(-12deg);
+}
+
+.philosophyCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--color-white);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.list li span.material-symbols-outlined {
+  color: #a9c7ff; /* tertiary-fixed-dim equivalent from design */
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.list li span:last-child {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .aboutContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .cardIcon {
+    top: -20px;
+    left: 20px;
+  }
+}

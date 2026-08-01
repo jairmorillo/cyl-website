@@ -1,0 +1,148 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 31, 63, 0.85); /* Deep Navy with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 15px 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoImg {
+  height: 72px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.navLinks {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.navLinks a {
+  color: var(--color-text-dark); /* Dark initially */
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.navLinks a:hover {
+  opacity: 0.7;
+}
+
+.scrolled .navLinks a {
+  color: var(--color-white);
+}
+
+.ctaButton {
+  background-color: var(--color-primary);
+  color: var(--color-white) !important;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.scrolled .ctaButton {
+  background-color: var(--color-white);
+  color: var(--color-primary) !important;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.hamburgerBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+  z-index: 1001;
+}
+
+.hamburgerBtn span {
+  font-size: 32px;
+}
+
+.scrolled .hamburgerBtn {
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 24px;
+  }
+
+  .logoImg {
+    height: 56px;
+  }
+
+  .hamburgerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(0, 31, 63, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    padding: 40px 20px;
+  }
+
+  .navLinks.mobileOpen {
+    right: 0;
+  }
+
+  .navLinks a:not(.ctaButton) {
+    color: var(--color-white) !important;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .navLinks a.ctaButton {
+    background-color: var(--color-white) !important;
+    color: var(--color-primary) !important;
+    width: 90%;
+    text-align: center;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
