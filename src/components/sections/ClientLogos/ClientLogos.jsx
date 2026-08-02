@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './ClientLogos.module.css';
 
-const logos = [
-  { name: 'TechCorp', icon: 'domain' },
-  { name: 'Nexus Systems', icon: 'hub' },
-  { name: 'Apex Logistics', icon: 'local_shipping' },
-  { name: 'Vertex Labs', icon: 'science' },
-  { name: 'Nova Solutions', icon: 'insights' },
-  { name: 'Global Tech', icon: 'language' }
+const clientLogos = [
+  { name: 'Florida Quality Roof Solution', src: '/client-logos/fq-roofing.png' },
+  { name: 'DNA Roofing LLC', src: '/client-logos/dna-roofing.png' },
+  { name: 'RZ Agentes Aduanales', src: '/client-logos/rz-aduanales.png' },
+  { name: 'My Steps App', src: '/client-logos/my-steps.png' },
+  { name: 'Inleonca', src: '/client-logos/inleonca.png' }
 ];
 
 const ClientLogos = () => {
@@ -19,10 +18,9 @@ const ClientLogos = () => {
       
       <div className={styles.marqueeContainer}>
         <div className={styles.track}>
-          {[...logos, ...logos, ...logos].map((logo, index) => (
+          {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
             <div key={index} className={styles.logoItem}>
-              <span className={`material-symbols-outlined ${styles.icon}`}>{logo.icon}</span>
-              <span className={styles.name}>{logo.name}</span>
+              <img src={logo.src} alt={logo.name} className={styles.logoImg} />
             </div>
           ))}
         </div>

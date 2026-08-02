@@ -1,5 +1,5 @@
 .marqueeSection {
-  padding: 32px 0;
+  padding: 36px 0;
   background-color: var(--color-white);
   border-top: 1px solid rgba(0, 31, 63, 0.06);
   border-bottom: 1px solid rgba(0, 31, 63, 0.06);
@@ -10,7 +10,7 @@
 
 .label {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -22,15 +22,15 @@
   display: flex;
   width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }
 
 .track {
   display: flex;
-  gap: 60px;
+  gap: 70px;
   align-items: center;
-  animation: marquee 25s linear infinite;
+  animation: marquee 22s linear infinite;
   white-space: nowrap;
 }
 
@@ -41,26 +41,26 @@
 .logoItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: var(--color-primary);
-  opacity: 0.6;
+  justify-content: center;
+  height: 52px;
+  opacity: 0.8;
+  filter: grayscale(15%);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .logoItem:hover {
   opacity: 1;
-  transform: scale(1.05);
+  filter: grayscale(0%);
+  transform: scale(1.08);
 }
 
-.icon {
-  font-size: 28px;
-}
-
-.name {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
+.logoImg {
+  max-height: 48px;
+  max-width: 180px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 @keyframes marquee {
@@ -68,6 +68,6 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%);
+    transform: translateX(-50%);
   }
 }
