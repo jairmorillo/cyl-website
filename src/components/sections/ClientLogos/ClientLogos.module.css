@@ -28,9 +28,10 @@
 
 .track {
   display: flex;
-  gap: 70px;
+  gap: 60px;
   align-items: center;
-  animation: marquee 22s linear infinite;
+  width: max-content;
+  animation: marquee 25s linear infinite;
   white-space: nowrap;
 }
 
