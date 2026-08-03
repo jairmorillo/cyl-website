@@ -1,30 +1,36 @@
 import { CYL_SYSTEM_PROMPT } from '../data/chatbotFaq';
 
-// Limpiador estricto para extraer ÚNICAMENTE la respuesta final en español y descartar cualquier análisis o borrador interno
+// Limpiador estricto para Gemma 4 que extrae ÚNICAMENTE la respuesta final y elimina cualquier pensamiento/metadato
 const cleanThinkingOutput = (text) => {
   if (!text) return '';
-  
-  // 1. Eliminar etiquetas <thought>...</thought> o similares
   let cleaned = text.replace(/<thought>[\s\S]*?<\/thought>/gi, '');
-  
-  // 2. Si la IA devolvió bloques con viñetas de análisis (* User asks:, * Rule:, * Context:, * Role:, * Draft:), extraer solo el bloque final entre comillas o la última sección limpia
-  const quoteMatch = cleaned.match(/"([^"]{15,})"/s);
-  if (quoteMatch && quoteMatch[1] && !quoteMatch[1].includes('User asks')) {
-    return quoteMatch[1].trim();
+
+  // 1. Si contiene la frase estándar de derivación de CYL
+  const phraseMatch = cleaned.match(/(Como asistente de (CYL|Cordero)[\s\S]*)/i);
+  if (phraseMatch && phraseMatch[1]) {
+    let result = phraseMatch[1].trim();
+    result = result.replace(/^["'\s*]+|["'\s*]+$/g, '');
+    return result;
   }
 
-  // 3. Filtrar cualquier línea que comience con asteriscos de análisis de prompt
+  // 2. Si la IA incluyó una etiqueta "Response:"
+  if (/Response:/i.test(cleaned)) {
+    const parts = cleaned.split(/Response:/i);
+    let result = parts[parts.length - 1].trim();
+    result = result.replace(/^["'\s*]+|["'\s*]+$/g, '');
+    return result;
+  }
+
+  // 3. Filtrar líneas que comienzan con viñetas de razonamiento (* User, * Role, * Constraint, etc.)
   const lines = cleaned.split('\n');
-  const filteredLines = lines.filter(line => {
-    const trimmed = line.trim();
-    if (trimmed.startsWith('* User') || trimmed.startsWith('* Rule') || trimmed.startsWith('* Context') || trimmed.startsWith('* Role') || trimmed.startsWith('* The request') || trimmed.startsWith('* I must') || trimmed.startsWith('* Draft')) {
-      return false;
-    }
-    return true;
+  const contentLines = lines.filter(l => {
+    const t = l.trim();
+    return !t.startsWith('*') && !t.startsWith('-') && !/^(Role|Constraint|User|Analysis|System|Persona|Draft):/i.test(t);
   });
 
-  cleaned = filteredLines.join('\n').replace(/\n\s*\n\s*\n/g, '\n\n').trim();
-  return cleaned;
+  let result = contentLines.join('\n').trim();
+  result = result.replace(/^["'\s*]+|["'\s*]+$/g, '');
+  return result || cleaned;
 };
 
 export const askGeminiAI = async (userPrompt) => {
