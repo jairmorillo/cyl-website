@@ -55,7 +55,7 @@ const Navbar = () => {
         </button>
 
         <nav className={`${styles.navLinks} ${isMobileMenuOpen ? styles.mobileOpen : ''}`}>
-          <a href={getNavHref('#about')} onClick={closeMobileMenu}>Propósito</a>
+          <Link to="/nosotros" onClick={closeMobileMenu}>Nosotros</Link>
           <a href={getNavHref('#services')} onClick={closeMobileMenu}>Servicios</a>
           <a href={getNavHref('#portafolio')} onClick={closeMobileMenu}>Portafolio</a>
           <a href={getNavHref('#benefits')} onClick={closeMobileMenu}>Impacto</a>

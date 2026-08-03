@@ -12,6 +12,7 @@ const Footer = () => {
       </div>
       
       <div className={styles.links}>
+        <Link to="/nosotros">Nosotros</Link>
         <Link to="/privacidad">Privacidad</Link>
         <Link to="/terminos">Términos</Link>
         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
