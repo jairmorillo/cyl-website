@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar/Navbar';
 import Footer from './components/layout/Footer/Footer';
 import WhatsAppButton from './components/ui/WhatsAppButton/WhatsAppButton';
+import Chatbot from './components/ui/Chatbot/Chatbot';
 import Home from './pages/Home/Home';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Privacy from './pages/Privacy/Privacy';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/terminos" element={<Terms />} />
       </Routes>
       <Footer />
+      <Chatbot />
       <WhatsAppButton />
     </Router>
   );
