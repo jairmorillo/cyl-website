@@ -160,7 +160,7 @@
 .messageRow {
   display: flex;
   gap: 10px;
-  max-width: 88%;
+  max-width: 90%;
 }
 
 .botRow {
@@ -210,6 +210,58 @@
   white-space: pre-line;
 }
 
+.actionButtonsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.msgWhatsappBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #25d366;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.msgWhatsappBtn:hover {
+  transform: scale(1.03);
+  background: #20ba5a;
+}
+
+.returnMenuBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 31, 63, 0.2);
+  color: var(--color-primary);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.returnMenuBtn:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+.returnMenuBtn span {
+  font-size: 16px;
+}
+
 .optionsList {
   display: flex;
   flex-direction: column;
@@ -254,27 +306,6 @@
   background: #25d366;
   color: #ffffff;
   border-color: #25d366;
-}
-
-.msgWhatsappBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #25d366;
-  color: #ffffff;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  margin-top: 10px;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-  transition: transform 0.2s, background 0.2s;
-}
-
-.msgWhatsappBtn:hover {
-  transform: scale(1.03);
-  background: #20ba5a;
 }
 
 .typingIndicator {

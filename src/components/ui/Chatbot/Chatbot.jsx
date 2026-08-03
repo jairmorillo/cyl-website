@@ -35,6 +35,18 @@ const Chatbot = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleReturnToMenu = () => {
+    setShowInput(false);
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: 'bot',
+        text: 'Menú Principal: Selecciona la opción que deseas consultar:',
+        options: INITIAL_OPTIONS
+      }
+    ]);
+  };
+
   const handleOptionClick = async (option) => {
     if (option.isWhatsapp) {
       window.open(WHATSAPP_LINK, '_blank');
@@ -49,13 +61,14 @@ const Chatbot = () => {
         {
           sender: 'bot',
           text: 'Por favor escribe tu duda a continuación y con gusto nuestra IA te responderá (o puedes contactar a un asesor por WhatsApp en cualquier momento):',
-          showWhatsappBtn: true
+          showWhatsappBtn: true,
+          showReturnMenuBtn: true
         }
       ]);
       return;
     }
 
-    // Predefined answer
+    // Respuesta predefinida normal (NO lanza el menú completo de nuevo, solo WhatsApp y Volver al Menú)
     const answer = PREDEFINED_ANSWERS[option.id];
     setMessages((prev) => [
       ...prev,
@@ -63,8 +76,8 @@ const Chatbot = () => {
       {
         sender: 'bot',
         text: answer,
-        options: INITIAL_OPTIONS,
-        showWhatsappBtn: true
+        showWhatsappBtn: true,
+        showReturnMenuBtn: true
       }
     ]);
   };
@@ -86,18 +99,19 @@ const Chatbot = () => {
     const aiResponse = await askGeminiAI(userQuery);
 
     setIsTyping(false);
+    // La IA responde e incluye ÚNICAMENTE botón de WhatsApp y Volver al Menú
     setMessages((prev) => [
       ...prev,
       {
         sender: 'bot',
         text: aiResponse,
-        options: INITIAL_OPTIONS,
-        showWhatsappBtn: true
+        showWhatsappBtn: true,
+        showReturnMenuBtn: true
       }
     ]);
   };
 
-  // Helper to parse simple markdown bolding **text**
+  // Helper para renderizar negritas simples **texto**
   const renderFormattedText = (text) => {
     if (!text) return null;
     const parts = text.split(/(\*\*.*?\*\*)/g);
@@ -160,20 +174,34 @@ const Chatbot = () => {
                     {renderFormattedText(msg.text)}
                   </div>
 
-                  {/* WhatsApp redirect button if requested */}
-                  {msg.showWhatsappBtn && (
-                    <a
-                      href={WHATSAPP_LINK}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.msgWhatsappBtn}
-                    >
-                      <span className="material-symbols-outlined">chat</span>
-                      Hablar con un Asesor por WhatsApp
-                    </a>
+                  {/* Acciones tras una respuesta: WhatsApp y/o Volver al Menú */}
+                  {(msg.showWhatsappBtn || msg.showReturnMenuBtn) && (
+                    <div className={styles.actionButtonsRow}>
+                      {msg.showWhatsappBtn && (
+                        <a
+                          href={WHATSAPP_LINK}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.msgWhatsappBtn}
+                        >
+                          <span className="material-symbols-outlined">chat</span>
+                          Hablar por WhatsApp
+                        </a>
+                      )}
+
+                      {msg.showReturnMenuBtn && (
+                        <button
+                          className={styles.returnMenuBtn}
+                          onClick={handleReturnToMenu}
+                        >
+                          <span className="material-symbols-outlined">arrow_back</span>
+                          Volver al Menú
+                        </button>
+                      )}
+                    </div>
                   )}
 
-                  {/* Options Chips */}
+                  {/* Menú de opciones iniciales (solo se muestra al inicio o al volver al menú) */}
                   {msg.options && (
                     <div className={styles.optionsList}>
                       {msg.options.map((opt) => (
@@ -210,7 +238,7 @@ const Chatbot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Formulario de texto libre si activó "¿No consigues la respuesta?" */}
+          {/* Formulario de texto libre solo cuando se activa "¿No consigues la respuesta?" */}
           {showInput && (
             <form className={styles.chatFooter} onSubmit={handleSendMessage}>
               <input
