@@ -1,11 +1,29 @@
 import { CYL_SYSTEM_PROMPT } from '../data/chatbotFaq';
 
-// Limpiador automático para eliminar cualquier pensamiento interno o notas de borrador que genere la IA
+// Limpiador estricto para extraer ÚNICAMENTE la respuesta final en español y descartar cualquier análisis o borrador interno
 const cleanThinkingOutput = (text) => {
   if (!text) return '';
+  
+  // 1. Eliminar etiquetas <thought>...</thought> o similares
   let cleaned = text.replace(/<thought>[\s\S]*?<\/thought>/gi, '');
-  cleaned = cleaned.replace(/^\s*\*\s*(User asks|Rule|Context|The system prompt|Since I don't|Draft|Internal).*$/gmi, '');
-  cleaned = cleaned.replace(/\n\s*\n\s*\n/g, '\n\n').trim();
+  
+  // 2. Si la IA devolvió bloques con viñetas de análisis (* User asks:, * Rule:, * Context:, * Role:, * Draft:), extraer solo el bloque final entre comillas o la última sección limpia
+  const quoteMatch = cleaned.match(/"([^"]{15,})"/s);
+  if (quoteMatch && quoteMatch[1] && !quoteMatch[1].includes('User asks')) {
+    return quoteMatch[1].trim();
+  }
+
+  // 3. Filtrar cualquier línea que comience con asteriscos de análisis de prompt
+  const lines = cleaned.split('\n');
+  const filteredLines = lines.filter(line => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('* User') || trimmed.startsWith('* Rule') || trimmed.startsWith('* Context') || trimmed.startsWith('* Role') || trimmed.startsWith('* The request') || trimmed.startsWith('* I must') || trimmed.startsWith('* Draft')) {
+      return false;
+    }
+    return true;
+  });
+
+  cleaned = filteredLines.join('\n').replace(/\n\s*\n\s*\n/g, '\n\n').trim();
   return cleaned;
 };
 
@@ -35,7 +53,7 @@ export const askGeminiAI = async (userPrompt) => {
         }
       ],
       generationConfig: {
-        temperature: 0.2,
+        temperature: 0.1,
         maxOutputTokens: 350
       }
     };
