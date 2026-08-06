@@ -27,7 +27,7 @@
   background: #002d5c;
 }
 
-.chatbotFloatBtn span {
+.chatbotFloatBtn > span {
   font-size: 30px;
 }
 
@@ -37,7 +37,7 @@
   object-fit: contain;
 }
 
-.badge {
+.chatbotFloatBtn .badge {
   position: absolute;
   right: 68px;
   background: rgba(0, 31, 63, 0.92);
@@ -45,7 +45,7 @@
   color: #ffffff;
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 12px !important;
   font-weight: 600;
   white-space: nowrap;
   pointer-events: none;
