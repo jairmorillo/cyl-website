@@ -32,8 +32,8 @@
 }
 
 .chatbotIconImg {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
 }
 
@@ -45,7 +45,7 @@
   color: #ffffff;
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   pointer-events: none;

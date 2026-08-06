@@ -122,7 +122,7 @@ const Chatbot = () => {
 
   return (
     <div className={styles.chatbotWrapper}>
-      {/* Botón Flotante con favicon oficial */}
+      {/* Botón Flotante con el nuevo chat-icon.png */}
       <button
         className={`${styles.chatbotFloatBtn} ${isOpen ? styles.active : ''}`}
         onClick={toggleChat}
@@ -131,7 +131,7 @@ const Chatbot = () => {
         {isOpen ? (
           <span className="material-symbols-outlined">close</span>
         ) : (
-          <img src="/favicon.svg" alt="CYL" className={styles.chatbotIconImg} />
+          <img src="/chat-icon.png" alt="CYL Chat" className={styles.chatbotIconImg} />
         )}
         {!isOpen && <span className={styles.badge}>¿Tienes alguna duda?</span>}
       </button>
@@ -141,7 +141,7 @@ const Chatbot = () => {
         <div className={styles.chatWindow}>
           <header className={styles.chatHeader}>
             <div className={styles.botAvatar}>
-              <img src="/favicon.svg" alt="CYL" className={styles.headerAvatarImg} />
+              <img src="/chat-icon.png" alt="CYL" className={styles.headerAvatarImg} />
             </div>
             <div className={styles.botInfo}>
               <h4>Asistente Virtual CYL</h4>
@@ -164,7 +164,7 @@ const Chatbot = () => {
               >
                 {msg.sender === 'bot' && (
                   <div className={styles.msgAvatar}>
-                    <img src="/favicon.svg" alt="CYL" className={styles.msgAvatarImg} />
+                    <img src="/chat-icon.png" alt="CYL" className={styles.msgAvatarImg} />
                   </div>
                 )}
 
@@ -222,7 +222,7 @@ const Chatbot = () => {
             {isTyping && (
               <div className={`${styles.messageRow} ${styles.botRow}`}>
                 <div className={styles.msgAvatar}>
-                  <img src="/favicon.svg" alt="CYL" className={styles.msgAvatarImg} />
+                  <img src="/chat-icon.png" alt="CYL" className={styles.msgAvatarImg} />
                 </div>
                 <div className={styles.typingIndicator}>
                   <span></span>
