@@ -4,7 +4,7 @@ export const INITIAL_OPTIONS = [
   { id: 'portfolio', label: 'Ver casos de éxito y proyectos', icon: 'folder_open' },
   { id: 'values', label: 'Propósito y Valores de la firma', icon: 'verified' },
   { id: 'custom_question', label: '¿No consigues la respuesta?', icon: 'help_outline' },
-  { id: 'whatsapp', label: 'Hablar con un asesor por WhatsApp', icon: 'chat', isWhatsapp: true }
+  { id: 'whatsapp', label: 'Contactar con un operador', icon: 'support_agent', isWhatsapp: true }
 ];
 
 export const PREDEFINED_ANSWERS = {

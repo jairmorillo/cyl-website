@@ -60,7 +60,7 @@ const Chatbot = () => {
         { sender: 'user', text: option.label },
         {
           sender: 'bot',
-          text: 'Por favor escribe tu duda a continuación y con gusto nuestra IA te responderá (o puedes contactar a un asesor por WhatsApp en cualquier momento):',
+          text: 'Por favor escribe tu duda a continuación y con gusto nuestra IA te responderá (o puedes contactar con un operador en cualquier momento):',
           showWhatsappBtn: true,
           showReturnMenuBtn: true
         }
@@ -68,7 +68,7 @@ const Chatbot = () => {
       return;
     }
 
-    // Respuesta predefinida normal (NO lanza el menú completo de nuevo, solo WhatsApp y Volver al Menú)
+    // Respuestas predefinidas normales (NO muestran el botón de operador por defecto, solo Volver al Menú)
     const answer = PREDEFINED_ANSWERS[option.id];
     setMessages((prev) => [
       ...prev,
@@ -76,7 +76,7 @@ const Chatbot = () => {
       {
         sender: 'bot',
         text: answer,
-        showWhatsappBtn: true,
+        showWhatsappBtn: false,
         showReturnMenuBtn: true
       }
     ]);
@@ -99,7 +99,7 @@ const Chatbot = () => {
     const aiResponse = await askGeminiAI(userQuery);
 
     setIsTyping(false);
-    // La IA responde e incluye ÚNICAMENTE botón de WhatsApp y Volver al Menú
+    // Al hablar con la IA, SÍ incluye el botón de Contactar con un operador y Volver al Menú
     setMessages((prev) => [
       ...prev,
       {
@@ -174,7 +174,7 @@ const Chatbot = () => {
                     {renderFormattedText(msg.text)}
                   </div>
 
-                  {/* Acciones tras una respuesta: WhatsApp y/o Volver al Menú */}
+                  {/* Acciones tras una respuesta: Contactar con un operador y/o Volver al Menú */}
                   {(msg.showWhatsappBtn || msg.showReturnMenuBtn) && (
                     <div className={styles.actionButtonsRow}>
                       {msg.showWhatsappBtn && (
@@ -184,8 +184,8 @@ const Chatbot = () => {
                           rel="noopener noreferrer"
                           className={styles.msgWhatsappBtn}
                         >
-                          <span className="material-symbols-outlined">chat</span>
-                          Hablar por WhatsApp
+                          <span className="material-symbols-outlined">support_agent</span>
+                          Contactar con un operador
                         </a>
                       )}
 
