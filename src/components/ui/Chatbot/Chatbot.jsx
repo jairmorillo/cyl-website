@@ -68,7 +68,6 @@ const Chatbot = () => {
       return;
     }
 
-    // Respuestas predefinidas normales (NO muestran el botón de operador por defecto, solo Volver al Menú)
     const answer = PREDEFINED_ANSWERS[option.id];
     setMessages((prev) => [
       ...prev,
@@ -99,7 +98,6 @@ const Chatbot = () => {
     const aiResponse = await askGeminiAI(userQuery);
 
     setIsTyping(false);
-    // Al hablar con la IA, SÍ incluye el botón de Contactar con un operador y Volver al Menú
     setMessages((prev) => [
       ...prev,
       {
@@ -111,7 +109,6 @@ const Chatbot = () => {
     ]);
   };
 
-  // Helper para renderizar negritas simples **texto**
   const renderFormattedText = (text) => {
     if (!text) return null;
     const parts = text.split(/(\*\*.*?\*\*)/g);
@@ -125,16 +122,18 @@ const Chatbot = () => {
 
   return (
     <div className={styles.chatbotWrapper}>
-      {/* Botón Flotante */}
+      {/* Botón Flotante con favicon oficial */}
       <button
         className={`${styles.chatbotFloatBtn} ${isOpen ? styles.active : ''}`}
         onClick={toggleChat}
         aria-label="Asistente Virtual CYL"
       >
-        <span className="material-symbols-outlined">
-          {isOpen ? 'close' : 'smart_toy'}
-        </span>
-        {!isOpen && <span className={styles.badge}>Chat CYL</span>}
+        {isOpen ? (
+          <span className="material-symbols-outlined">close</span>
+        ) : (
+          <img src="/favicon.svg" alt="CYL" className={styles.chatbotIconImg} />
+        )}
+        {!isOpen && <span className={styles.badge}>¿Tienes alguna duda?</span>}
       </button>
 
       {/* Ventana de Chat */}
@@ -142,7 +141,7 @@ const Chatbot = () => {
         <div className={styles.chatWindow}>
           <header className={styles.chatHeader}>
             <div className={styles.botAvatar}>
-              <span className="material-symbols-outlined">smart_toy</span>
+              <img src="/favicon.svg" alt="CYL" className={styles.headerAvatarImg} />
             </div>
             <div className={styles.botInfo}>
               <h4>Asistente Virtual CYL</h4>
@@ -165,7 +164,7 @@ const Chatbot = () => {
               >
                 {msg.sender === 'bot' && (
                   <div className={styles.msgAvatar}>
-                    <span className="material-symbols-outlined">smart_toy</span>
+                    <img src="/favicon.svg" alt="CYL" className={styles.msgAvatarImg} />
                   </div>
                 )}
 
@@ -174,7 +173,6 @@ const Chatbot = () => {
                     {renderFormattedText(msg.text)}
                   </div>
 
-                  {/* Acciones tras una respuesta: Contactar con un operador y/o Volver al Menú */}
                   {(msg.showWhatsappBtn || msg.showReturnMenuBtn) && (
                     <div className={styles.actionButtonsRow}>
                       {msg.showWhatsappBtn && (
@@ -201,7 +199,6 @@ const Chatbot = () => {
                     </div>
                   )}
 
-                  {/* Menú de opciones iniciales (solo se muestra al inicio o al volver al menú) */}
                   {msg.options && (
                     <div className={styles.optionsList}>
                       {msg.options.map((opt) => (
@@ -225,7 +222,7 @@ const Chatbot = () => {
             {isTyping && (
               <div className={`${styles.messageRow} ${styles.botRow}`}>
                 <div className={styles.msgAvatar}>
-                  <span className="material-symbols-outlined">smart_toy</span>
+                  <img src="/favicon.svg" alt="CYL" className={styles.msgAvatarImg} />
                 </div>
                 <div className={styles.typingIndicator}>
                   <span></span>
@@ -238,7 +235,6 @@ const Chatbot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Formulario de texto libre solo cuando se activa "¿No consigues la respuesta?" */}
           {showInput && (
             <form className={styles.chatFooter} onSubmit={handleSendMessage}>
               <input

@@ -1,7 +1,7 @@
 .chatbotWrapper {
   position: fixed;
   bottom: 24px;
-  right: 92px;
+  right: 24px;
   z-index: 1000;
 }
 
@@ -29,6 +29,12 @@
 
 .chatbotFloatBtn span {
   font-size: 30px;
+}
+
+.chatbotIconImg {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .badge {
@@ -101,8 +107,10 @@
   justify-content: center;
 }
 
-.botAvatar span {
-  font-size: 24px;
+.headerAvatarImg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .botInfo {
@@ -185,8 +193,10 @@
   flex-shrink: 0;
 }
 
-.msgAvatar span {
-  font-size: 18px;
+.msgAvatarImg {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .messageBubble {
@@ -388,7 +398,7 @@
 @media (max-width: 768px) {
   .chatbotWrapper {
     bottom: 20px;
-    right: 84px;
+    right: 20px;
   }
 
   .chatWindow {
