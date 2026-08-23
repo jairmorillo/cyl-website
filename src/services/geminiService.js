@@ -73,7 +73,7 @@ const sanitizeText = (raw) => {
 
 export const askGeminiAI = async (userPrompt) => {
   try {
-    const apiKey = import.meta.env.VITE_GOOGLE_AI_KEY;
+    const apiKey = import.meta.env.VITE_GOOGLE_AI_KEY || import.meta.env.VITE_GEMINI_API_KEY;
     if (!apiKey) {
       console.warn('VITE_GOOGLE_AI_KEY no está configurada.');
       return 'Nuestra IA está disponible mediante atención directa. Si tienes cualquier consulta, con gusto te atenderemos personalmente vía WhatsApp al +58 424-6676099.';
@@ -97,8 +97,8 @@ export const askGeminiAI = async (userPrompt) => {
         }
       ],
       generationConfig: {
-        temperature: 0.1,
-        maxOutputTokens: 350
+        temperature: 0.2,
+        maxOutputTokens: 1000
       }
     };
 
