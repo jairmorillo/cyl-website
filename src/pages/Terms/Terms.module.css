@@ -80,11 +80,69 @@
   margin-bottom: 16px;
 }
 
+.section h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 .section p {
-  font-size: 16px;
+  font-size: 15.5px;
+  color: #43474e;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.section ul,
+.section ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+.section li {
+  font-size: 15px;
   color: #43474e;
   line-height: 1.7;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
+}
+
+.calloutBox {
+  background: rgba(0, 31, 63, 0.03);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 22px;
+  margin: 20px 0;
+}
+
+.calloutTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calloutBox p {
+  font-size: 14.5px;
+  color: #555962;
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.legalLink {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.legalLink:hover {
+  opacity: 0.75;
 }
 
 @media (max-width: 768px) {
@@ -98,5 +156,13 @@
 
   .glassCard {
     padding: 28px 20px;
+  }
+
+  .section h2 {
+    font-size: 19px;
+  }
+
+  .section h3 {
+    font-size: 16px;
   }
 }
