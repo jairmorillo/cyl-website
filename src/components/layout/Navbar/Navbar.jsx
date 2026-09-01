@@ -59,7 +59,6 @@ const Navbar = () => {
           <a href={getNavHref('#services')} onClick={closeMobileMenu}>Servicios</a>
           <a href={getNavHref('#portafolio')} onClick={closeMobileMenu}>Portafolio</a>
           <a href={getNavHref('#benefits')} onClick={closeMobileMenu}>Impacto</a>
-          <a href={getNavHref('#resenas')} onClick={closeMobileMenu}>Reseñas</a>
           <a href={getNavHref('#contact')} className={styles.ctaButton} onClick={closeMobileMenu}>Agenda tu consultoría</a>
         </nav>
       </div>

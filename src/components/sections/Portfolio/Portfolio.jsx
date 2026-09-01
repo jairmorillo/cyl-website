@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../../ui/Button/Button';
 import ParticlesBackground from '../../ui/ParticlesBackground/ParticlesBackground';
 import styles from './Portfolio.module.css';
 

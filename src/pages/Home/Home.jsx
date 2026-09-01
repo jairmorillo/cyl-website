@@ -5,7 +5,7 @@ import About from '../../components/sections/About/About';
 import Services from '../../components/sections/Services/Services';
 import Portfolio from '../../components/sections/Portfolio/Portfolio';
 import Benefits from '../../components/sections/Benefits/Benefits';
-import Reviews from '../../components/sections/Reviews/Reviews';
+// import Reviews from '../../components/sections/Reviews/Reviews';
 import Contact from '../../components/sections/Contact/Contact';
 import { useAnimations } from '../../hooks/useAnimations';
 
@@ -20,7 +20,7 @@ const Home = () => {
       <Services />
       <Portfolio />
       <Benefits />
-      <Reviews />
+      {/* <Reviews /> - Oculto temporalmente en producción hasta integrar reseñas reales */}
       <Contact />
     </main>
   );
