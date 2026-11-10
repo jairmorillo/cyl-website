@@ -47,37 +47,42 @@ const callModel = async ({ model, apiKey, prompt }) => {
 };
 
 export const onRequestPost = async ({ request, env }) => {
-  const origin = request.headers.get('Origin');
-
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
-    return json({ error: 'Origin not allowed' }, 403);
-  }
-
-  if (!env.GOOGLE_AI_KEY) {
-    return json({ error: 'AI service not configured' }, 500);
-  }
-
-  const body = await request.json().catch(() => null);
-  const prompt = typeof body?.prompt === 'string' ? body.prompt.trim() : '';
-
-  if (!prompt) {
-    return json({ error: 'Invalid prompt' }, 400);
-  }
-
-  if (prompt.length > MAX_PROMPT_LENGTH) {
-    return json({ error: 'Prompt too long' }, 413);
-  }
-
   try {
-    const parts = await callModel({ model: PRIMARY_MODEL, apiKey: env.GOOGLE_AI_KEY, prompt });
-    return json({ parts });
-  } catch (primaryError) {
-    try {
-      const parts = await callModel({ model: FALLBACK_MODEL, apiKey: env.GOOGLE_AI_KEY, prompt });
-      return json({ parts });
-    } catch (fallbackError) {
-      console.error('AI service failed for both models:', primaryError, fallbackError);
-      return json({ error: 'AI service unavailable', detail: `${primaryError.message} / ${fallbackError.message}` }, 502);
+    const origin = request.headers.get('Origin');
+
+    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+      return json({ error: 'Origin not allowed' }, 403);
     }
+
+    if (!env.GOOGLE_AI_KEY) {
+      return json({ error: 'AI service not configured' }, 500);
+    }
+
+    const body = await request.json().catch(() => null);
+    const prompt = typeof body?.prompt === 'string' ? body.prompt.trim() : '';
+
+    if (!prompt) {
+      return json({ error: 'Invalid prompt' }, 400);
+    }
+
+    if (prompt.length > MAX_PROMPT_LENGTH) {
+      return json({ error: 'Prompt too long' }, 413);
+    }
+
+    try {
+      const parts = await callModel({ model: PRIMARY_MODEL, apiKey: env.GOOGLE_AI_KEY, prompt });
+      return json({ parts });
+    } catch (primaryError) {
+      try {
+        const parts = await callModel({ model: FALLBACK_MODEL, apiKey: env.GOOGLE_AI_KEY, prompt });
+        return json({ parts });
+      } catch (fallbackError) {
+        console.error('AI service failed for both models:', primaryError, fallbackError);
+        return json({ error: 'AI service unavailable', detail: `${primaryError.message} / ${fallbackError.message}` }, 502);
+      }
+    }
+  } catch (fatalError) {
+    console.error('Unexpected error in /api/chat:', fatalError);
+    return json({ error: 'Unexpected proxy failure', detail: String(fatalError && fatalError.message) }, 500);
   }
 };
