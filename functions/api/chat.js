@@ -19,9 +19,12 @@ const json = (payload, status) => (
 );
 
 const callModel = async ({ model, apiKey, prompt }) => {
-  const response = await fetch(`${API_BASE}/${model}:generateContent?key=${apiKey}`, {
+  const response = await fetch(`${API_BASE}/${model}:generateContent`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': apiKey,
+    },
     body: JSON.stringify({
       system_instruction: { parts: [{ text: CYL_SYSTEM_PROMPT }] },
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
@@ -74,7 +77,7 @@ export const onRequestPost = async ({ request, env }) => {
       return json({ parts });
     } catch (fallbackError) {
       console.error('AI service failed for both models:', primaryError, fallbackError);
-      return json({ error: 'AI service unavailable' }, 502);
+      return json({ error: 'AI service unavailable', detail: `${primaryError.message} / ${fallbackError.message}` }, 502);
     }
   }
 };
