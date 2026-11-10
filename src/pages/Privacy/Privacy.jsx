@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Privacy.module.css';
+import { useSEO } from '../../hooks/useSEO';
 
 const Privacy = () => {
+  useSEO({
+    title: 'Política de Privacidad | CYL',
+    description: 'Política de Privacidad de Cordero y León, C.A. adaptada a RGPD/GDPR, CCPA/CPRA, LGPD y ePrivacy. Conoce cómo protegemos tus datos personales.',
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

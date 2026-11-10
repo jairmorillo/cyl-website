@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AboutUs.module.css';
+import { useSEO } from '../../hooks/useSEO';
 
 const AboutUs = () => {
+  useSEO({
+    title: 'Nosotros | CYL Consultoría Tecnológica',
+    description: 'Conoce la misión, visión y valores de Cordero y León, C.A.: crecimiento sostenible, automatización de procesos y soluciones tecnológicas de alto impacto.',
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Terms.module.css';
+import { useSEO } from '../../hooks/useSEO';
 
 const Terms = () => {
+  useSEO({
+    title: 'Términos y Condiciones | CYL',
+    description: 'Términos y Condiciones de servicio de Cordero y León, C.A.: SLA, propiedad intelectual, limitación de responsabilidad y resolución de controversias.',
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

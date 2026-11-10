@@ -8,8 +8,14 @@ import Benefits from '../../components/sections/Benefits/Benefits';
 // import Reviews from '../../components/sections/Reviews/Reviews';
 import Contact from '../../components/sections/Contact/Contact';
 import { useAnimations } from '../../hooks/useAnimations';
+import { useSEO } from '../../hooks/useSEO';
 
 const Home = () => {
+  useSEO({
+    title: 'CYL | Consultoría Tecnológica y Automatización para Empresas',
+    description: 'Impulsa el crecimiento de tu empresa con CYL: automatización de procesos, desarrollo de software a medida, marketing digital y consultoría tecnológica. Solicita tu sesión de consultoría gratuita.',
+  });
+
   useAnimations();
 
   return (
